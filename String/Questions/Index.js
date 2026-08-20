@@ -45,4 +45,10 @@ for( let char of a)
 }
 console.log(freq)
 }
-frequencyCounter(a)
+// frequencyCounter(a)
+
+// pallidrome string
+function isPalindrome(str) {
+    let reversedStr = str.split("").reverse().join("")
+    return str === reversedStr
+}
