@@ -149,3 +149,99 @@ list.InsertAtPosition(15,5);
     list.FastAndSlowPointer();
 // Traverse
 list.traversal();
+
+
+class DoublyNode {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    append(data) {
+        const newNode = new DoublyNode(data);
+
+        if (this.head === null) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+
+        newNode.prev = this.tail;
+        this.tail.next = newNode;
+        this.tail = newNode;
+    }
+
+    prepend(data) {
+        const newNode = new DoublyNode(data);
+
+        if (this.head === null) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+
+        newNode.next = this.head;
+        this.head.prev = newNode;
+        this.head = newNode;
+    }
+
+    remove(data) {
+        let current = this.head;
+
+        while (current !== null && current.data !== data) {
+            current = current.next;
+        }
+
+        if (current === null) {
+            return false;
+        }
+
+        if (current.prev === null) {
+            this.head = current.next;
+        } else {
+            current.prev.next = current.next;
+        }
+
+        if (current.next === null) {
+            this.tail = current.prev;
+        } else {
+            current.next.prev = current.prev;
+        }
+
+        return true;
+    }
+
+    traverseForward() {
+        let current = this.head;
+
+        while (current !== null) {
+            console.log(current.data);
+            current = current.next;
+        }
+    }
+
+    traverseBackward() {
+        let current = this.tail;
+
+        while (current !== null) {
+            console.log(current.data);
+            current = current.prev;
+        }
+    }
+}
+
+const doublyList = new DoublyLinkedList();
+doublyList.append(10);
+doublyList.append(20);
+doublyList.prepend(5);
+doublyList.traverseForward();
+doublyList.remove(20);
+doublyList.traverseBackward();
